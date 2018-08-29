@@ -64,10 +64,12 @@ function doPost (e) {
     /*
     Maps the headers array to a new array. If a header's value is 'timestamp' then it
     returns a new Date() object, otherwise it returns the value of the matching URL parameter
+    If the URL parameter does not match an existing column header then the cell will be blank for that column in the new row
     https://developers.google.com/apps-script/guides/web
     */
     var newRow = headers.map(function(header) {
-      return header === 'timestamp' ? new Date() : e.parameter[header]
+      var formValue = e.parameter[header] == undefined ? '' : e.parameter[header]
+      return header === 'timestamp' ? new Date() : formValue
     })
 
     /*

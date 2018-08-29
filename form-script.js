@@ -23,7 +23,8 @@ function doPost (e) {
     var nextRow = sheet.getLastRow() + 1
 
     var newRow = headers.map(function(header) {
-      return header === 'timestamp' ? new Date() : e.parameter[header]
+      var formValue = e.parameter[header] == undefined ? '' : e.parameter[header]
+      return header === 'timestamp' ? new Date() : formValue 
     })
 
     sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow])
