@@ -106,3 +106,9 @@ function doPost (e) {
     lock.releaseLock()
   }
 }
+
+// Add descriptive HTML response
+function doGet(e) {
+  var params = JSON.stringify(e);
+  return HtmlService.createHtmlOutput(params);
+}
