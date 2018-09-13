@@ -68,8 +68,13 @@ function doPost (e) {
     https://developers.google.com/apps-script/guides/web
     */
     var newRow = headers.map(function(header) {
-      var formValue = e.parameter[header] == undefined ? '' : e.parameter[header]
-      return header === 'timestamp' ? new Date() : formValue
+      var formValue
+
+      if (header == 'timestamp') formValue = new Date()
+      else if (e.parameters[header] == undefined) formValue = ''
+      else formValue = e.parameters[header].join(',')
+      
+      return formValue
     })
 
     /*
